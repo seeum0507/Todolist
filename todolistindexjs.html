@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>오늘의 두두리스트</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="content">
+      <header><i>Todo List</i></header>
+      <div class="input">
+        <input
+          type="text"
+          placeholder="내용 입력을 입력해 주세요"
+          autofocus
+          class="textinput"
+        />
+        <button type="button" id="bnt" onclick="addTodo()">add</button>
+      </div>
+      <div>
+        <ul id="todo">
+          <li><div id="result"></div></li>
+        </ul>
+      </div>
+      <div class="footer">
+        <input
+          class="check"
+          type="button"
+          value="전체 선택"
+          onclick="allCheck()"
+        />
+        <input
+          class="delete"
+          type="button"
+          value="전체 삭제"
+          onclick="allClear()"
+        />
+      </div>
+    </div>
+    <script>
+      const textInput = document.querySelector(".textinput");
+      const Todo = document.getElementById("todo");
+
+      function addTodo() {
+        if (textInput.value === "") {
+          alert("다시 입력");
+        } else {
+          let li = document.createElement("li");
+          let checkbox = document.createElement("input");
+          checkbox.type = "checkbox";
+          li.appendChild(checkbox);
+          li.appendChild(document.createTextNode(" " + textInput.value));
+          Todo.appendChild(li);
+        }
+
+        textInput.value = "";
+      }
+
+      function allCheck() {
+        const checkboxes = Todo.querySelectorAll("input[type=checkbox]");
+        checkboxes.forEach((checkbox) => {
+          checkbox.checked = true;
+        });
+      }
+
+      function allClear() {
+        while (Todo.firstChild) {
+          Todo.removeChild(Todo.firstChild);
+        }
+      }
+    </script>
+  </body>
+</html>
